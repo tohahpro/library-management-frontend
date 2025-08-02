@@ -35,7 +35,7 @@ export const baseApi = createApi({
         }),
         createBook: builder.mutation({
             query: (body) => ({
-                url: "book",
+                url: "books",
                 method: "POST",
                 body
             }),
