@@ -94,6 +94,20 @@ const Navbar = () => {
                                 Create Book
                             </NavLink>
                         </li>
+                        <li className="w-[7.5rem]">
+                            <NavLink
+                                to="/borrow"
+                                className={({ isActive, isPending }) =>
+                                    isPending
+                                        ? "pending"
+                                        : isActive
+                                            ? "text-[#E59285]"
+                                            : ""
+                                }
+                            >
+                                Borrow Book
+                            </NavLink>
+                        </li>
                     </ul>
                 </div>
             </nav>

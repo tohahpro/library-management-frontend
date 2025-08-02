@@ -1,5 +1,5 @@
 
-import type { Book } from '@/type';
+import type { Book, Borrow, BorrowSummary } from '@/type';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 
@@ -56,8 +56,22 @@ export const baseApi = createApi({
             }),
             invalidatesTags: ["books"]
         }),
+        borrowBook: builder.mutation<Borrow, { book: string; quantity: number; dueDate: string }>({
+            query: (body) => ({
+                url: 'borrow',
+                method: 'POST',
+                body
+            }),
+            invalidatesTags: ['borrows', 'books']
+        }),
+        getBorrow: builder.query<BorrowSummary[], void>({
+            query: () => '/borrow',
+            transformResponse: (response: { success: boolean; message: string; data: BorrowSummary[] }) =>
+                response.data,
+            providesTags: ['borrows'],
+        })
     })
 });
 
 // 2nd step 
-export const { useGetBooksQuery, useCreateBookMutation, useGetBookByIdQuery, useUpdateBookMutation, useDeleteBookMutation } = baseApi;
+export const { useGetBooksQuery, useCreateBookMutation, useGetBookByIdQuery, useUpdateBookMutation, useDeleteBookMutation, useBorrowBookMutation, useGetBorrowQuery } = baseApi;
