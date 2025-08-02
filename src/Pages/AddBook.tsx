@@ -31,8 +31,7 @@ const AddBook = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data: any) => {
 
     try {
-      const res = await createBook(data).unwrap()
-      console.log("form data", res);
+      await createBook(data).unwrap()      
       form.reset({
         title: "",
         author: "",
@@ -44,7 +43,7 @@ const AddBook = () => {
         description: ""
       })
       toast.success("Book added successfully");
-    } catch (error) {
+    } catch (error : any) {
       const fullMessage = error?.data?.error || "Field to create book";
 
       const errorMessage = fullMessage.includes("Book validation failed:")

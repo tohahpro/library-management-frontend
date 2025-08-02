@@ -12,6 +12,8 @@ import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { formatDate } from "date-fns";
 import { CalendarIcon } from "lucide-react";
+import toast from "react-hot-toast";
+import { useBorrowBookMutation } from "@/redux/Api/baseApi";
 
 
 export function BorrowBookModal(data: any) {
@@ -19,24 +21,39 @@ export function BorrowBookModal(data: any) {
 
   const [open, setOpen] = useState(false);
 
-  
+  const [borrowBook] = useBorrowBookMutation();
 
 
-  const onSubmit: SubmitHandler<FieldValues> = async(e) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (e) => {
+    try {
+      const payload = {
+        book: data?.data?._id,
+        quantity: Number(e.quantity),
+        dueDate: e.dueDate,
+      };
+      await borrowBook(payload).unwrap();
+      toast.success("✅ Book borrowed successfully!");
 
-    console.log(e);
-    
-    
-    setOpen(false)
-    form.reset();
+      setOpen(false);
+      form.reset();
+
+    } catch (error: any) {
+      const errorMessage =
+        error?.data?.message || "Something went wrong. Please try again.";
+
+      toast.error(`❌ ${errorMessage}`);
+    }
+
+
   }
 
-  
+  //   console.log(data);
+
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="px-4 py-1 bg-[#da8e81] text-white rounded hover:bg-[#7e534c] hover:animate-pulse hover:text-white" variant="outline">Borrow Book <PiBookOpenText className="font-bold text-2xl"/></Button>
+        <Button className="px-4 py-1 bg-[#da8e81] text-white rounded hover:bg-[#7e534c] hover:animate-pulse hover:text-white" variant="outline">Borrow Book <PiBookOpenText className="font-bold text-2xl" /></Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] md:max-w-xl space-y-4">
         <DialogHeader>
@@ -59,7 +76,7 @@ export function BorrowBookModal(data: any) {
                       <FormLabel>Quantity </FormLabel>
                       <FormControl>
                         <Input {...field}
-                           
+                        required
                           type="number"
                           value={field.value || ""} />
                       </FormControl>
@@ -96,6 +113,7 @@ export function BorrowBookModal(data: any) {
                         <PopoverContent className="w-full p-0" align="start">
                           <Calendar
                             mode="single"
+                            required
                             selected={field.value}
                             onSelect={field.onChange}
                             disabled={(date) =>
