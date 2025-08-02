@@ -68,7 +68,7 @@ const Navbar = () => {
                     <ul className="text-lg font-semibold lg:flex gap-8">
                         <li>
                             <NavLink
-                                to="/"
+                                to="/books"
                                 className={({ isActive, isPending }) =>
                                     isPending
                                         ? "pending"
@@ -77,7 +77,7 @@ const Navbar = () => {
                                             : ""
                                 }
                             >
-                                Home
+                                Books
                             </NavLink>
                         </li>
                         <li className="w-[6.3rem]">

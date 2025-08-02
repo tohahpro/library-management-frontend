@@ -26,9 +26,9 @@ const bookDetails = () => {
                     <p className="text-sm"><span>Author : </span>{data?.author}</p>
                     <p className="text-sm"><span>Availability : </span><span className="text-[#c97263] pl-2">{data?.available ? 'Available' : 'Unavailable'}</span></p>
                     <p className="text-sm"><span>Book Copies : </span>{data?.copies}</p>
-                    <p className="text-sm"><span>Book Genres : </span><span className="text-[#c97263] font-semibold">{data?.genre}</span></p>
 
-                    <div className="py-10">
+                    <div className="flex items-center gap-8">
+                    <p className="text-sm"><span>Book Genres : </span><span className="text-[#c97263] font-semibold">{data?.genre}</span></p>
                         <BorrowBookModal data={data}/>
                     </div>
                 </div>

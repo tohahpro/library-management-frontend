@@ -4,6 +4,7 @@ import AddBook from "../Pages/AddBook";
 import Home from "@/Pages/Home";
 import bookDetails from "@/Pages/bookDetails";
 import borrowBooks from "@/Pages/borrowBooks";
+import AllBooks from "@/Pages/AllBooks";
 
 
 const router = createBrowserRouter([
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 Component: Home
+            },
+            {
+                path: '/books',
+                Component: AllBooks
             },
             {
                 path: 'create-book',
