@@ -42,7 +42,7 @@ const BookUpdate = () => {
             author: "",
             genre: "",
             isbn: "",
-            availability: "available",
+            availability: "",
             copies: 0,
             imageURL: "",
             description: ""
@@ -56,8 +56,7 @@ const BookUpdate = () => {
                 author: data.author,
                 genre: data.genre,
                 isbn: data.isbn,
-                availability: data.available ? "available" : "unavailable", // ✅ convert boolean to string
-                copies: data.copies || 0,
+                availability: data.available ? "available" : "unavailable",
                 imageURL: data.imageURL || "",
                 description: data.description
             });
@@ -66,16 +65,23 @@ const BookUpdate = () => {
     }, [data, form]);
 
     const onSubmit: SubmitHandler<FieldValues> = async (formData: any) => {
+        console.log(parseInt(formData.copies));
+        let isAvailable = false;
+        if (parseInt(formData.copies) !== 0) {
+            isAvailable = formData.availability === "available";
+        }        
         const updateData = {
             title: formData.title,
             author: formData.author,
             genre: formData.genre,
             isbn: formData.isbn,
-            available: formData.availability === "available", // ✅ convert string to boolean
+            available: isAvailable,
             copies: formData.copies,
             imageURL: formData.imageURL,
             description: formData.description
         };
+        console.log(updateData);
+
 
         try {
             await updateBook({ id, data: updateData }).unwrap();

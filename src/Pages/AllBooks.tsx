@@ -1,14 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TiArrowForward, TiArrowBack } from "react-icons/ti";
 import { useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { useGetBooksQuery } from "@/redux/Api/baseApi";
+import { useDeleteBookMutation, useGetBooksQuery } from "@/redux/Api/baseApi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GoPencil } from "react-icons/go";
 import { Link } from "react-router";
+import toast from "react-hot-toast";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
 const AllBooks = () => {
-  
+
   const [page, setPage] = useState(1);
   const limit = 9;
 
@@ -25,8 +28,10 @@ const AllBooks = () => {
     refetchOnReconnect: true,
   });
 
+  const [deleteBook] = useDeleteBookMutation();
+
   console.log(data);
-  
+
   const books = data?.data || [];
   const meta = data?.meta;
 
@@ -50,6 +55,7 @@ const AllBooks = () => {
                 <TableHead className="text-white">ISBN</TableHead>
                 <TableHead className="text-white">Author</TableHead>
                 <TableHead className="text-white">Genre</TableHead>
+                <TableHead className="text-white">Copies</TableHead>
                 <TableHead className="text-white">Availability</TableHead>
                 <TableHead className="text-white">Action</TableHead>
               </TableRow>
@@ -63,11 +69,48 @@ const AllBooks = () => {
                     <TableCell>{book.isbn}</TableCell>
                     <TableCell>{book.author}</TableCell>
                     <TableCell>{book.genre}</TableCell>
+                    <TableCell>{book.copies}</TableCell>
                     <TableCell>{book.available ? "Available" : "Unavailable"}</TableCell>
                     <TableCell className="flex gap-6 text-lg">
-                        <Link to={`/book-update/${book._id}`}><GoPencil /></Link>
-                        <RiDeleteBin6Line className="text-red-400"/>
+                      <Link to={`/book-update/${book._id}`}>
+                        <GoPencil />
+                      </Link>
+
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <button className="text-red-400">
+                            <RiDeleteBin6Line />
+                          </button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will permanently delete the book"<strong>{book.title}</strong>".
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={async () => {
+                                try {
+                                  await deleteBook(book._id).unwrap();
+                                  toast.success("✅ Book deleted successfully");
+                                } catch (error) {
+                                  console.log(error);
+                                  
+                                  toast.error("❌ Failed to delete book");
+                                }
+                              }}
+                              className="bg-red-500 hover:bg-red-600"
+                            >
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </TableCell>
+
                   </TableRow>
                 ))
               ) : (
