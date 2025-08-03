@@ -35,7 +35,7 @@ const AllBooks = () => {
 
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
+    <div className="max-w-8xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-center mb-6">List Of Books</h1>
 
       {isLoading ? (
@@ -52,7 +52,7 @@ const AllBooks = () => {
                 <TableHead className="text-white">Genre</TableHead>
                 <TableHead className="text-white">Copies</TableHead>
                 <TableHead className="text-white">Availability</TableHead>
-                <TableHead className="text-white">Action</TableHead>
+                <TableHead className="text-white flex justify-center items-center">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -66,25 +66,35 @@ const AllBooks = () => {
                     <TableCell>{book.genre}</TableCell>
                     <TableCell>{book.copies}</TableCell>
                     <TableCell>{book.available ? "Available" : "Unavailable"}</TableCell>
-                    <TableCell className="flex gap-6 text-lg">
-                      <Link to={`/borrow/${book?._id}`}>
-                        <PiBookOpenText className="font-bold text-2xl" />
-                      </Link>
-                      <Link to={`/edit-book/${book._id}`}>
-                        <GoPencil />
+                    <TableCell className="flex justify-center gap-6 text-lg">
+
+                      <div className="relative group inline-block cursor-pointer">
+                        <Link to={`/borrow/${book?._id}`} className="px-2 py-1 flex items-center rounded text-white bg-[#E59285]">
+                          <PiBookOpenText className="font-bold text-2xl" />
+                        </Link>
+                        <div
+                          className="absolute bottom-full right-6 mt-3 -translate-x-1
+               px-3 py-1 bg-gray-100 text-black text-sm rounded
+               opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          Borrow Book
+                        </div>
+                      </div>
+                      <Link className="px-2 py-1 flex items-center" to={`/edit-book/${book._id}`}>
+                        <span ><GoPencil className="" /></span>
                       </Link>
 
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
-                          <button className="text-red-400">
-                            <RiDeleteBin6Line />
+                          <button className="text-red-500">
+                            <RiDeleteBin6Line className="text-base" />
                           </button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent>
+                        <AlertDialogContent className="font-[Montserrat]">
                           <AlertDialogHeader>
-                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                            <AlertDialogTitle className="text-center">Are you absolutely sure?</AlertDialogTitle>
                             <AlertDialogDescription>
-                              This action cannot be undone. This will permanently delete the book"<strong>{book.title}</strong>".
+                              This action cannot be undone. This will <span className="text-red-500 font-semibold">permanently delete</span> "<strong>{book.title}</strong>" book.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>

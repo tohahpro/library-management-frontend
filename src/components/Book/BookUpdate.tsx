@@ -21,7 +21,7 @@ import {
 } from "../ui/select";
 import { DialogFooter } from "../ui/dialog";
 import { Button } from "../ui/button";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import {
     useGetBookByIdQuery,
     useUpdateBookMutation
@@ -35,6 +35,8 @@ const BookUpdate = () => {
     const { data } = useGetBookByIdQuery(id);
     const [updateBook] = useUpdateBookMutation();
     const [isReady, setIsReady] = useState(false);
+    const navigate = useNavigate();
+    
 
     const form = useForm({
         defaultValues: {
@@ -42,7 +44,7 @@ const BookUpdate = () => {
             author: "",
             genre: "",
             isbn: "",
-            availability: "",
+            availability: "available",
             copies: 0,
             imageURL: "",
             description: ""
@@ -65,11 +67,8 @@ const BookUpdate = () => {
     }, [data, form]);
 
     const onSubmit: SubmitHandler<FieldValues> = async (formData: any) => {
-        console.log(parseInt(formData.copies));
-        let isAvailable = false;
-        if (parseInt(formData.copies) !== 0) {
-            isAvailable = formData.availability === "available";
-        }        
+        const copiesNumber = Number(formData.copies);
+        const isAvailable = copiesNumber > 0;
         const updateData = {
             title: formData.title,
             author: formData.author,
@@ -97,6 +96,7 @@ const BookUpdate = () => {
                 imageURL: "",
                 description: ""
             });
+            navigate('/books')
         } catch (error: any) {
             const fullMessage = error?.data?.error || "Failed to update book";
 
