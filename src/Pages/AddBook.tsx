@@ -9,6 +9,7 @@ import { useCreateBookMutation } from "@/redux/Api/baseApi";
 import { Select } from "@radix-ui/react-select";
 import { FormProvider, useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 
 const AddBook = () => {
@@ -26,7 +27,7 @@ const AddBook = () => {
   })
 
   const [createBook] = useCreateBookMutation()
-
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data: any) => {
 
@@ -43,6 +44,7 @@ const AddBook = () => {
         description: ""
       })
       toast.success("Book added successfully");
+      navigate('/books')
     } catch (error : any) {
       const fullMessage = error?.data?.error || "Field to create book";
 
