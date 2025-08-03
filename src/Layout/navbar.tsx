@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { BiMenuAltRight, BiMenu } from "react-icons/bi";
 import { useState } from "react";
 
@@ -10,7 +10,7 @@ const Navbar = () => {
             <nav className="flex lg:items-center justify-between py-10">
                 {/* brand logo  */}
                 <div className="flex-1">
-                    <h2 className="text-2xl font-extrabold">Book</h2>
+                    <Link to={`/`} className="text-2xl font-extrabold">Book</Link>
                 </div>
 
                 {/* mobile view icon  */}

@@ -3,7 +3,9 @@ import { TiArrowForward, TiArrowBack } from "react-icons/ti";
 import { useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useGetBooksQuery } from "@/redux/Api/baseApi";
-
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { GoPencil } from "react-icons/go";
+import { Link } from "react-router";
 
 const AllBooks = () => {
   
@@ -61,9 +63,10 @@ const AllBooks = () => {
                     <TableCell>{book.isbn}</TableCell>
                     <TableCell>{book.author}</TableCell>
                     <TableCell>{book.genre}</TableCell>
-                    <TableCell>{book.availability ? "Available" : "Unavailable"}</TableCell>
-                    <TableCell>
-                        
+                    <TableCell>{book.available ? "Available" : "Unavailable"}</TableCell>
+                    <TableCell className="flex gap-6 text-lg">
+                        <Link to={`/book-update/${book._id}`}><GoPencil /></Link>
+                        <RiDeleteBin6Line className="text-red-400"/>
                     </TableCell>
                   </TableRow>
                 ))
