@@ -29,7 +29,7 @@ const BookCard = ({ book }: any) => {
                         {book.available ? "Available" : "Unavailable"}
                     </span>
                     <div className="">
-                        <Link to={`book/${book._id}`} className="btn btn-primary">View Details</Link>
+                        <Link to={`books/${book._id}`} className="btn btn-primary">View Details</Link>
                     </div>
                 </div>
             </div>

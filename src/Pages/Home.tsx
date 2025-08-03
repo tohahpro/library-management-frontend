@@ -41,8 +41,6 @@ const Home = () => {
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
-
-  console.log(data);
   
   const books = data?.data || [];
   const meta = data?.meta;

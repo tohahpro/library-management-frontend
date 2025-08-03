@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TiArrowForward, TiArrowBack } from "react-icons/ti";
 import { useState } from "react";
@@ -9,11 +8,12 @@ import { GoPencil } from "react-icons/go";
 import { Link } from "react-router";
 import toast from "react-hot-toast";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { PiBookOpenText } from "react-icons/pi";
 
 const AllBooks = () => {
 
   const [page, setPage] = useState(1);
-  const limit = 9;
+  const limit = 10;
 
   const queryParam: Record<string, string | number> = {
     page,
@@ -30,8 +30,6 @@ const AllBooks = () => {
 
   const [deleteBook] = useDeleteBookMutation();
 
-  console.log(data);
-
   const books = data?.data || [];
   const meta = data?.meta;
 
@@ -39,9 +37,6 @@ const AllBooks = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-center mb-6">List Of Books</h1>
-
-
-
 
       {isLoading ? (
         <p className="text-center mt-10">Loading...</p>
@@ -72,7 +67,10 @@ const AllBooks = () => {
                     <TableCell>{book.copies}</TableCell>
                     <TableCell>{book.available ? "Available" : "Unavailable"}</TableCell>
                     <TableCell className="flex gap-6 text-lg">
-                      <Link to={`/book-update/${book._id}`}>
+                      <Link to={`/borrow/${book?._id}`}>
+                        <PiBookOpenText className="font-bold text-2xl" />
+                      </Link>
+                      <Link to={`/edit-book/${book._id}`}>
                         <GoPencil />
                       </Link>
 
@@ -98,7 +96,7 @@ const AllBooks = () => {
                                   toast.success("✅ Book deleted successfully");
                                 } catch (error) {
                                   console.log(error);
-                                  
+
                                   toast.error("❌ Failed to delete book");
                                 }
                               }}

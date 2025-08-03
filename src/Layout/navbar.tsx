@@ -77,7 +77,7 @@ const Navbar = () => {
                                             : ""
                                 }
                             >
-                                Books
+                               All Books
                             </NavLink>
                         </li>
                         <li className="w-[6.3rem]">
@@ -91,12 +91,12 @@ const Navbar = () => {
                                             : ""
                                 }
                             >
-                                Create Book
+                                Add Book
                             </NavLink>
                         </li>
                         <li className="w-[7.5rem]">
                             <NavLink
-                                to="/borrow"
+                                to="/borrow-summary"
                                 className={({ isActive, isPending }) =>
                                     isPending
                                         ? "pending"
@@ -105,7 +105,7 @@ const Navbar = () => {
                                             : ""
                                 }
                             >
-                                Borrow Book
+                                Borrow Summary
                             </NavLink>
                         </li>
                     </ul>

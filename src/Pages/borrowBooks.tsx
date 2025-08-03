@@ -7,9 +7,6 @@ const borrowBooks = () => {
 
     const { data, isLoading, error } = useGetBorrowQuery();
 
-    console.log(data);
-
-
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Something went wrong.</p>;
 
