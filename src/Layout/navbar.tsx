@@ -28,44 +28,9 @@ const Navbar = () => {
 
                 {/* large view hidden and mobile view flex  */}
                 <div
-                    className={`absolute lg:flex mt-12 w-full py-5 bg-black lg:m-0  lg:p-0 duration-1000
+                    className={`absolute lg:flex mt-12 w-full py-5 z-50 bg-[#F1F1F1] lg:m-0  lg:p-0 duration-2000
                      ${open ? " " : "hidden"} lg:static lg:bg-transparent text-center space-y-2`}>                    
-                    <ul className="lg:hidden lg:gap-5 space-y-2 text-white">
-                        <li>
-                            <NavLink
-                                to="/"
-                                className={({ isActive, isPending }) =>
-                                    isPending
-                                        ? "pending"
-                                        : isActive
-                                            ? "text-[#E59285] underline"
-                                            : ""
-                                }
-                            >
-                                Home
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/"
-                                className={({ isActive, isPending }) =>
-                                    isPending
-                                        ? "pending"
-                                        : isActive
-                                            ? "text-[#E59285] underline"
-                                            : ""
-                                }
-                            >
-                                Orders
-                            </NavLink>
-                        </li>
-
-                    </ul>
-                </div>
-
-                {/* mobile view hidden  for --------- large view  */}
-                <div className="hidden lg:flex items-center lg:gap-5 space-y-2">
-                    <ul className="text-lg font-semibold lg:flex gap-8">
+                    <ul className="lg:hidden lg:gap-5 space-y-2 text-black font-semibold font-[Montserrat]">
                         <li>
                             <NavLink
                                 to="/books"
@@ -73,14 +38,14 @@ const Navbar = () => {
                                     isPending
                                         ? "pending"
                                         : isActive
-                                            ? "text-[#E59285] underline"
+                                            ? "text-[#E59285]"
                                             : ""
                                 }
                             >
-                               All Books
+                                All Books
                             </NavLink>
                         </li>
-                        <li className="w-[6.3rem]">
+                        <li>
                             <NavLink
                                 to="/create-book"
                                 className={({ isActive, isPending }) =>
@@ -94,7 +59,56 @@ const Navbar = () => {
                                 Add Book
                             </NavLink>
                         </li>
-                        <li className="w-[7.5rem]">
+                        <li>
+                            <NavLink
+                                to="/borrow-summary"
+                                className={({ isActive, isPending }) =>
+                                    isPending
+                                        ? "pending"
+                                        : isActive
+                                            ? "text-[#E59285]"
+                                            : ""
+                                }
+                            >
+                                Borrow Summary
+                            </NavLink>
+                        </li>
+
+                    </ul>
+                </div>
+
+                {/* mobile view hidden  for --------- large view  */}
+                <div className="hidden lg:flex items-center lg:gap-5 space-y-2">
+                    <ul className="text-lg font-semibold lg:flex gap-8">
+                        <li className="w-[5rem]">
+                            <NavLink
+                                to="/books"
+                                className={({ isActive, isPending }) =>
+                                    isPending
+                                        ? "pending"
+                                        : isActive
+                                            ? "text-[#E59285]"
+                                            : ""
+                                }
+                            >
+                               All Books
+                            </NavLink>
+                        </li>
+                        <li className="w-[5.1rem]">
+                            <NavLink
+                                to="/create-book"
+                                className={({ isActive, isPending }) =>
+                                    isPending
+                                        ? "pending"
+                                        : isActive
+                                            ? "text-[#E59285]"
+                                            : ""
+                                }
+                            >
+                                Add Book
+                            </NavLink>
+                        </li>
+                        <li className="w-[9rem]">
                             <NavLink
                                 to="/borrow-summary"
                                 className={({ isActive, isPending }) =>

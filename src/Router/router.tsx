@@ -19,7 +19,7 @@ const router = createBrowserRouter([
                 Component: Home
             },
             {
-                path: '/books',
+                path: 'books',
                 Component: AllBooks
             },
             {
