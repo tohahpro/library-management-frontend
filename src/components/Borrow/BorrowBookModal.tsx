@@ -14,6 +14,7 @@ import { formatDate } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import { useBorrowBookMutation } from "@/redux/Api/baseApi";
+import { useNavigate } from "react-router";
 
 
 export function BorrowBookModal(data: any) {
@@ -22,7 +23,7 @@ export function BorrowBookModal(data: any) {
   const [open, setOpen] = useState(false);
 
   const [borrowBook] = useBorrowBookMutation();
-
+  const navigation = useNavigate()
 
   const onSubmit: SubmitHandler<FieldValues> = async (e) => {
     try {
@@ -33,22 +34,15 @@ export function BorrowBookModal(data: any) {
       };
       await borrowBook(payload).unwrap();
       toast.success("✅ Book borrowed successfully!");
-
       setOpen(false);
+      navigation("/borrow-summary")
       form.reset();
-
     } catch (error: any) {
       const errorMessage =
         error?.data?.message || "Something went wrong. Please try again.";
-
       toast.error(`❌ ${errorMessage}`);
     }
-
-
   }
-
-  //   console.log(data);
-
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
