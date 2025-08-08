@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useGetBooksQuery } from "@/redux/Api/baseApi";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const genreOptions = [
   "ALL",
@@ -41,7 +42,7 @@ const Home = () => {
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
-  
+
   const books = data?.data || [];
   const meta = data?.meta;
 
@@ -52,10 +53,10 @@ const Home = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold text-center mb-6">Library Books</h1>
+      <h1 className="text-3xl font-bold text-center mb-24">Library Books</h1>
 
 
-      <div className="flex justify-end mb-6">
+      <div className="lg:hidden flex justify-end mb-6">
         <Select value={genreFilter} onValueChange={handleGenreChange}>
           <SelectTrigger className="w-[200px]">
             <SelectValue placeholder="Select Genre" />
@@ -68,6 +69,23 @@ const Home = () => {
             ))}
           </SelectContent>
         </Select>
+      </div>
+
+      <div className="hidden flex-1 lg:flex w-full mb-6">
+        <Tabs
+          className=""
+          defaultValue="ALL"
+          value={genreFilter}
+          onValueChange={handleGenreChange}
+        >
+          <TabsList className="px-2">            
+              {genreOptions.map((genre) => (
+                <TabsTrigger className="px-5" key={genre} value={genre}>
+                  {genre}
+                </TabsTrigger>
+              ))}            
+          </TabsList>
+        </Tabs>
       </div>
 
 

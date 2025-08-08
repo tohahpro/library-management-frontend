@@ -23,13 +23,12 @@ const BookCard = ({ book }: any) => {
                             className={cn(
                                 "text-sm py-0.5 px-3 flex justify-center items-center gap-1 rounded-lg font-medium",
                                 {
-
                                     "bg-[#D4F5DD] text-[#196435] px-4": book.genre == "FANTASY",
                                     "bg-[#f0c6c6] text-[#804d4d] px-4": book.genre == "BIOGRAPHY",
                                     "bg-[#FFE0B5] text-[#882222] px-4": book.genre == "HISTORY",
-                                    "bg-[#EFF3EA] text-[#86976f] px-4": book.genre == "SCIENCE",
+                                    "bg-[#EFF3EA] text-[#525e42] px-4": book.genre == "SCIENCE",
                                     "bg-[#FFE8CD] text-[#a03131] px-4": book.genre == "NON_FICTION",
-                                    "bg-[#CAE8BD] text-[#99bb8a] px-4": book.genre == "FICTION",
+                                    "bg-[#CAE8BD] text-[#638156] px-4": book.genre == "FICTION",
                                 }
                             )}>
                             {book.genre}
@@ -59,7 +58,7 @@ const BookCard = ({ book }: any) => {
                         <p className="text-lg font-medium">{book.title.length > 30 ? `${book.title.slice(0, 30)}...` : book.title}</p>
                         <p className="font-light">Author: {book.author}</p>                 
                     <div className="flex justify-between gap-3">
-                        <Link to={`books/${book._id}`} className="btn btn-primary full flex-1">View Details</Link>
+                        <Link to={`books/${book._id}`} className="btn btn-neutral full flex-1">View Details</Link>
                         <Link to={`/borrow/${book?._id}`} className="px-2 py-1 flex items-center rounded text-white bg-[#E59285]">
                             <PiBookOpenText className="font-bold text-2xl" />
                         </Link>
