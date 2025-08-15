@@ -58,12 +58,12 @@ const AddBook = () => {
   }
 
   return (
-    <div className="w-4/6 mx-auto mt-10 mb-32 font-[Montserrat] bg-[#F1F1F1] rounded-md">
+    <div className="md:w-4/6 mx-auto mt-10 mb-32 font-[Montserrat] bg-[#F1F1F1] rounded-md">
       <h3 className="text-center font-bold text-xl pt-10">Add New <span className="text-[#E59285]">Book</span></h3>
       <div className="p-10">
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="flex gap-5">
+            <div className="md:flex gap-5 space-y-4">
               <div className="flex-1">
                 <FormField
                   control={form.control}
@@ -98,7 +98,7 @@ const AddBook = () => {
             </div>
 
 
-            <div className="flex gap-5">
+            <div className="md:flex gap-5 space-y-4">
               <div className="flex-1">
                 <FormField
                   control={form.control}
@@ -143,7 +143,7 @@ const AddBook = () => {
               </div>
             </div>
 
-            <div className="flex gap-5">
+            <div className="md:flex gap-5 space-y-4">
               <div className="flex-1">
                 <FormField
                   control={form.control}

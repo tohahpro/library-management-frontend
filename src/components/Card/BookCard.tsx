@@ -8,7 +8,7 @@ const BookCard = ({ book }: any) => {
     
     return (
         <div className="flex-1">
-            <div className="card bg-base-100 w-fit shadow-sm">
+            <div className="card bg-base-100 md:w-80 shadow-sm">
                 <figure>
                     <img className="w-full"
                         src={book.imageURL}

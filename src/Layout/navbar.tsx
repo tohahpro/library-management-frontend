@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router";
 import { BiMenuAltRight, BiMenu } from "react-icons/bi";
 import { useState } from "react";
+import logo from "../assets/logo.png"
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
@@ -9,8 +10,10 @@ const Navbar = () => {
         <div>
             <nav className="flex lg:items-center justify-between py-10">
                 {/* brand logo  */}
-                <div className="flex-1">
-                    <Link to={`/`} className="text-2xl font-extrabold">Book</Link>
+                <div className="">
+                    <Link to={`/`} className="">
+                    <img className="w-1/4 md:w-1/2" src={logo} alt="" />
+                    </Link>
                 </div>
 
                 {/* mobile view icon  */}
