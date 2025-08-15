@@ -5,3 +5,13 @@ A library management system that is both responsive and simple, using React, Red
 # 🚀 Live Site
 
  [Visit Site](https://librarymanagement-jade.vercel.app)
+
+# 🧰 Tech Stack
+
+| Layer | Tech Used |
+|----------|----------|
+| Frontend   | React, TypeScript   |
+| State Mgmt   |Redux Toolkit, RTK Query   |
+| Styling   | Tailwind CSS   |
+| Backend   | Node.js, Express.js, TypeScript   |
+| Database   | 	MongoDB, Mongoose   |
